@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <!-- product.product.history -->
+
+        <!-- Tree View product.product.history -->
+        <record id="product_product_history_tree" model="ir.ui.view">
+            <field name="name">product.product.history.tree</field>
+            <field name="model">product.product.history</field>
+            <field name="arch" type="xml">
+                <tree string="Product History" create="0" edit="0" delete="0">
+                    <field name="product_id"/>
+                    <field name="name"/>
+                    <field name="value"/>
+                    <field name="create_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search View product.product.history -->
+        <record id="product_product_history_search" model="ir.ui.view">
+            <field name="name">product.product.history.search</field>
+            <field name="model">product.product.history</field>
+            <field name="arch" type="xml">
+                <search string="Product History">
+                    <field name="name"/>
+                    <group col="8" colspan="4" expand="0" string="Group By">
+                        <filter name="group_by_product" string="By Product" domain="[]"
+                                context="{'group_by':'product_id'}"/>
+                        <filter name="group_by_month" string="Creation date (month)" domain="[]"
+                                context="{'group_by':'create_date:month'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Form View product.product.history -->
+        <record id="product_product_history_form" model="ir.ui.view">
+            <field name="name">product.product.history.form</field>
+            <field name="model">product.product.history</field>
+            <field name="arch" type="xml">
+                <form string="Product History" create="0" edit="0" delete="0">
+                    <header></header>
+                    <sheet>
+                        <group>
+                            <field name="product_id"/>
+                            <field name="name"/>
+                            <field name="value"/>
+                            <field name="create_date"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action product.product.history -->
+        <record id="action_product_product_history_list" model="ir.actions.act_window">
+            <field name="name">Product History</field>
+            <field name="res_model">product.product.history</field>
+            <field name="context">{"search_default_group_by_product": 1}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="product_product_history_menu" name="Product History" action="action_product_product_history_list"
+            parent="stock.menu_stock_inventory_control" sequence="31" groups="product.group_product_variant"/>
+
+</odoo>
