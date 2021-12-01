@@ -1,6 +1,9 @@
 from odoo import api, fields, models, _
 from odoo.tools.float_utils import float_compare
 import json
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class ProductProduct(models.Model):
@@ -15,15 +18,15 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     def write(self, vals):
-        res = super(ProductProduct, self).write(vals)
         if 'standard_price' in vals:
             standard_price = vals['standard_price']
             # if negative we remove it but will log
             if float_compare(standard_price, 0.0, precision_digits=3) < 0.0:
+                _logger.info("Prices cannot be negative")
                 vals.pop('standard_price')
             self.env['product.product.history'].create({
                 'name': json.dumps(vals),
-                'value': vals['standard_price'],
+                'value': standard_price,
                 'product_id': self.id
             })
-        return res
+        return super(ProductProduct, self).write(vals)
