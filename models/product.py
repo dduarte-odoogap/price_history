@@ -24,7 +24,6 @@ class ProductProduct(models.Model):
             if float_compare(standard_price, 0.0, precision_digits=3) < 0.0:
                 _logger.info("Prices cannot be negative")
                 vals.pop('standard_price')
-            print("-----------------1", vals)
             self.env['product.product.history'].create({
                 'name': json.dumps(vals),
                 'value': standard_price,
