@@ -47,6 +47,7 @@
                             <field name="name"/>
                             <field name="value"/>
                             <field name="create_date"/>
+                            <field name="code_context" widget="ace" options="{'mode': 'python'}"/>
                         </group>
                     </sheet>
                 </form>
@@ -55,13 +56,13 @@
 
         <!-- Action product.product.history -->
         <record id="action_product_product_history_list" model="ir.actions.act_window">
-            <field name="name">Product History</field>
+            <field name="name">Price History</field>
             <field name="res_model">product.product.history</field>
             <field name="context">{"search_default_group_by_product": 1}</field>
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem id="product_product_history_menu" name="Product History" action="action_product_product_history_list"
-            parent="stock.menu_stock_inventory_control" sequence="31" groups="product.group_product_variant"/>
+        <menuitem id="product_product_history_menu" name="Price History" action="action_product_product_history_list"
+            parent="stock.menu_stock_inventory_control" sequence="31"/>
 
 </odoo>
