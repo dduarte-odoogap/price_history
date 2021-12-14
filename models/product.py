@@ -14,7 +14,7 @@ class ProductProduct(models.Model):
     name = fields.Text(string="Vals", required=True)
     value = fields.Float(string='Sale Base Price', digits='Product Price', required=True, default=0.0)
     product_id = fields.Many2one('product.product', 'Product', required=True)
-    code_context = fields.Text(string="Code context", required=True)
+    code_context = fields.Text(string="Code context", required=False)
 
 
 class ProductProduct(models.Model):
